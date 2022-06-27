@@ -1,80 +1,51 @@
 package com.java.assignment6;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class VampireNumber {
-    public static void main(String[] args) {
-        Scanner sc=new Scanner(System.in);
-        int v=0;
-        long number,i,c=0,f=0,j=0,x,k,p,c1,c2,b[]=new long[100];
-        System.out.println("Enter a number:");
-        number=sc.nextLong();
-        //Counting the number of digits
-        for(i=number;i>0;i/=10)
-            c++;
-        if(c%2!=0)
-            f=1;
-        else
-        {
-            for(i=(int)Math.pow(10,c/2-1); i<(int)Math.pow(10,c/2);  i++)
-            {
-                if(number%i==0)  //i is one factor
-                {
-                    j=number/i;   //j is another factor
-                    if(!(j>=Math.pow(10,c/2-1) && j<Math.pow(10,c/2)))
-                        f=1;
+        public static void main(String[] args) {
+            ArrayList<Integer> listOfVampireNumbers=new ArrayList<>();
+            for(int i=1260;listOfVampireNumbers.size()<100;i++)
+                if(vampireFactors(i))
+                    listOfVampireNumbers.add(i);
+            for(int i=0;i<listOfVampireNumbers.size();i++)
+                System.out.println("Vampire number "+(i+1)+" is "+listOfVampireNumbers.get(i));
+        }
 
-                    x=i*(int)Math.pow(10,c/2)+j;
-
-                    if(i%10==0 && j%10==0)
-                    {
-                        f=1;
-                        break;
-                    }
-                    else //Check all digits are distinct or not
-                    {
-                        f=0;
-                        for(k=number;k>0;k/=10)
-                        {
-                            c1=c2=0;
-                            for(p=number;p>0;p/=10)
-                            {
-                                if(k%10==p%10)
-                                    c1++;
-                            }
-                            for(p=x;p>0;p/=10)
-                            {
-                                if(k%10==p%10)
-                                    c2++;
-                            }
-                            if(c1!=c2)
-                            {
-                                f=1;
-                                break;
-                            }
-                        }
-                        if(f==0)
-                        {
-                            int fl=0;
-                            for(int z=0;z<v;z++)
-                                if(b[z]==i || b[z]==j)
-                                    fl=1;
-                            if(fl==0)
-                                b[v++]=i;
-
-                        }
-                    }
-                }
+        public static boolean vampireOccurances(int num1,int num2,int number){
+            String number1=String.valueOf(num1);
+            String number2=String.valueOf(num2);
+            String vampire=String.valueOf(number);
+            if((number1.length()!=number2.length()) || (number1.endsWith("0") && number2.endsWith("0")))
+                return false;
+            String combinedNUmber=number1+number2;
+            char tempArray[] = combinedNUmber.toCharArray();
+            Arrays.sort(tempArray);
+            char vamArray[]=vampire.toCharArray();
+            Arrays.sort(vamArray);
+            combinedNUmber=new String(tempArray);
+            vampire=new String(vamArray);
+            if(combinedNUmber.equals(vampire)){
+                return true;
             }
 
+            return false;
         }
-        if(v==0)
-            System.out.println("Not a vampire number");
-        else
-        {
-            System.out.println("Vampire number factors are: ");
-            for(int z=0;z<v;z++)
-                System.out.println(b[z]+"\t"+(number/b[z]));
+
+        public static boolean vampireFactors(int number){
+            int factor1,factor2;
+            if(Integer.toString(number).length()%2!=0)
+                return false;
+            for(int k=1;k*k<=number;k++){
+                if(number%k==0) {
+                    factor1 = k;
+                    factor2 = number / factor1;
+                    if(vampireOccurances(factor1, factor2,number))
+                        return true;
+                }
+            }
+            return false;
         }
-    }
 }
