@@ -8,9 +8,12 @@ public class Assignment2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a String");
-        String s = sc.nextLine().replaceAll("[^a-zA-Z]", " ");
-        String s1 = s.replaceAll("\\s","");
+        String s = sc.nextLine();
+
+        //replaces all the empty spaces with non empty space
+        String s1 = s.replaceAll("\s","");
         String s2 = s1.toLowerCase();
+
         Set<Character> set = new TreeSet<>();
         for(int i=0;i<s1.length();i++)
         {

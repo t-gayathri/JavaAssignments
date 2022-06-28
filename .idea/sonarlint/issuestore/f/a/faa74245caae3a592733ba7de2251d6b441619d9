@@ -1,0 +1,9 @@
+
+a
+java:S1192 "KDefine a constant instead of duplicating this literal "dd-MM-yyyy" 3 times.(ó­÷Ç
+w
+java:S1488R"\Immediately return this expression instead of assigning it to the temporary variable "diff".(‘Æ‡üÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Õè°±ÿÿÿÿÿ
+N	java:S106?"9Replace this use of System.out or System.err by a logger.(Ÿ±ù–
+N	java:S106C"9Replace this use of System.out or System.err by a logger.(î„òş
+S	java:S106I"9Replace this use of System.out or System.err by a logger.(ì¤ùÔùÿÿÿÿ
